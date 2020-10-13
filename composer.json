@@ -1,0 +1,25 @@
+{
+    "require": {
+        "symfony/http-foundation": "^5.1",
+        "symfony/serializer": "^5.1",
+        "twig/twig": "^3.0",
+        "nesbot/carbon": "^2.41",
+        "symfony/routing": "^5.1"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+        ,
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Syrgoma\\Ski\\": "src/",
+            "Syrgoma\\Ski\\Interfaces\\": "interfaces/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Syrgoma\\Ski\\Tests\\": "tests/"
+        }
+    }
+}
