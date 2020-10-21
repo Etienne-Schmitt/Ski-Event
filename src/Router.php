@@ -7,8 +7,17 @@
 
 namespace Syrgoma\Ski;
 
+use Exception;
+use RuntimeException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Syrgoma\Ski\Controller\ErrorController;
+use Syrgoma\Ski\Controller\NotFoundController;
 
 /**
  * Class Router
@@ -107,5 +116,41 @@ class Router
         }
 
         $this->getRouteCollection()->add($routeName, $newRoute);
+    }
+
+    /**
+     * Start the router
+     *
+     * @return Response
+     */
+    public function startRouter(): Response
+    {
+        $context = new RequestContext();
+        $context->fromRequest(Request::createFromGlobals());
+
+        $urlMatcher = new UrlMatcher($this->getRouteCollection(), $context);
+
+        try {
+            $parameters = $urlMatcher->match($context->getPathInfo());
+
+            if (!isset($parameters['_controller'])) {
+                throw new RuntimeException("Error: Controller not specified");
+            }
+            $controller = $parameters['_controller'];
+            unset($parameters['_controller']);
+
+            $pageResult = new $controller();
+
+            $response = $pageResult->showPage($parameters);
+        } catch (ResourceNotFoundException $e) {
+            error_log($e->getMessage());
+            $response = new NotFoundController();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $response = new ErrorController();
+        }
+
+        /** @var Response $response */
+        return $response->send();
     }
 }
