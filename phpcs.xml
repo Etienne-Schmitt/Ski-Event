@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="Phpcs rules for Syrgoma\Ski">
+    <directory>interfaces/</directory>
+    <directory>public/</directory>
+    <directory>src/</directory>
+
+    <exclude-pattern>vendor</exclude-pattern>
+
+    <rule ref="PSR12"/>
+</ruleset>
