@@ -1,4 +1,15 @@
 {
+    "name": "syrgona/ski-event",
+    "description": "Project for acs",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Etienne Schmitt",
+            "email": "etienne@schmitt-etienne.fr"
+        }
+    ],
+    "minimum-stability": "stable",
     "require": {
         "symfony/http-foundation": "^5.1",
         "symfony/serializer": "^5.1",
