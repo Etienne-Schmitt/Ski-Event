@@ -26,7 +26,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: PHPCS PSR-12
-        run: vendor/bin/phpcs
+        run: vendor/bin/phpcs .
 
 
 
