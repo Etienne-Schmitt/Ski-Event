@@ -27,7 +27,9 @@ class DatabaseConfig implements DatabaseConfigInterface
      *
      * @param string $dbDriver        Database driver to use
      * @param string $host            Ip/dns of the database server
+     * @param string $port
      * @param string $database        Database name
+     * @param string $charset
      * @param string $user            Database allowed used
      * @param string $password        Database password for user
      * @param array  $availableDriver List of all driver available on the system
@@ -37,7 +39,9 @@ class DatabaseConfig implements DatabaseConfigInterface
     public function __construct(
         string $dbDriver,
         string $host,
+        string $port,
         string $database,
+        string $charset,
         string $user,
         string $password,
         array $availableDriver
@@ -46,7 +50,7 @@ class DatabaseConfig implements DatabaseConfigInterface
             throw new DriverNotAvailableException("Not a valid database driver : $dbDriver");
         }
 
-        $this->dsn      = "$dbDriver:dbname=$database;host=$host";
+        $this->dsn      = "$dbDriver:dbname=$database;host=$host;port=$port;charset=$charset";
         $this->user     = $user;
         $this->password = $password;
     }
