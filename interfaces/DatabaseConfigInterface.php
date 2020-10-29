@@ -5,7 +5,7 @@
  * @license GPL 2.0 or any later
  */
 
-namespace Syrgoma\Ski\Interfaces\Database;
+namespace Syrgoma\Ski\Interfaces;
 
 interface DatabaseConfigInterface
 {
