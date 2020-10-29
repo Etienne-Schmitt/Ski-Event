@@ -2,7 +2,7 @@
 
 /**
  * @author  Etienne Schmitt <etienne@schmitt-etienne.fr>
- * @license GPL2 or any later version
+ * @license GPL 2.0 or any later
  */
 
 namespace Syrgoma\Ski\Interfaces\Controller;
