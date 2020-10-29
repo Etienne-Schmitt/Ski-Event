@@ -7,7 +7,7 @@
 
 namespace Syrgoma\Ski;
 
-use Syrgoma\Ski\Exception\DriverNotAvailableException;
+use Syrgoma\Ski\Exception\DriverNotFoundException;
 use Syrgoma\Ski\Interfaces\DatabaseConfigInterface;
 
 /**
@@ -34,7 +34,7 @@ class DatabaseConfig implements DatabaseConfigInterface
      * @param string $password        Database password for user
      * @param array  $availableDriver List of all driver available on the system
      *
-     * @throws DriverNotAvailableException
+     * @throws DriverNotFoundException
      */
     public function __construct(
         string $dbDriver,
@@ -47,7 +47,7 @@ class DatabaseConfig implements DatabaseConfigInterface
         array $availableDriver
     ) {
         if (!in_array($dbDriver, $availableDriver, true)) {
-            throw new DriverNotAvailableException("Not a valid database driver : $dbDriver");
+            throw new DriverNotFoundException("Not a valid database driver : $dbDriver");
         }
 
         $this->dsn      = "$dbDriver:dbname=$database;host=$host;port=$port;charset=$charset";

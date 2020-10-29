@@ -7,9 +7,9 @@
 
 namespace Syrgoma\Ski\Exception;
 
-use Exception;
+use RuntimeException;
 
-class DriverNotAvailableException extends Exception
+class DriverNotFoundException extends RuntimeException
 {
 
 }
