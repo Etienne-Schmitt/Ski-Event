@@ -35,5 +35,4 @@ class Epreuve
     {
         return $this->participants;
     }
-
 }
