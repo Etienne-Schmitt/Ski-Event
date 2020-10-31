@@ -12,7 +12,7 @@ use Syrgoma\Ski\Entity\Categorie;
 use Syrgoma\Ski\Entity\Participant;
 use Syrgoma\Ski\Entity\Profil;
 
-interface ParticipantRepository
+interface ParticipantRepositoryInterface
 {
     /**
      * Find a Participant entity by his id

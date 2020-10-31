@@ -9,7 +9,7 @@ namespace Syrgoma\Ski\Interfaces\Repository;
 
 use Syrgoma\Ski\Entity\Profil;
 
-interface ProfilRepository
+interface ProfilRepositoryInterface
 {
     /**
      * Find a Profil entity by his id

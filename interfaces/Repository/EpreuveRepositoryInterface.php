@@ -10,7 +10,7 @@ namespace Syrgoma\Ski\Interfaces\Repository;
 use Carbon\Traits\Date;
 use Syrgoma\Ski\Entity\Epreuve;
 
-interface EpreuveRepository
+interface EpreuveRepositoryInterface
 {
     /**
      * Find a Epreuve entity by his id

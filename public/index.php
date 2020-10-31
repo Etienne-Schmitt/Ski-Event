@@ -26,4 +26,13 @@ $router->createNewRoute(
     "/test"
 );
 
-$router->startRouter();
+
+
+
+//$database = new PDO(
+//    $databaseConfig->getDsn(),
+//    $databaseConfig->getUser(),
+//    $databaseConfig->getPassword()
+//);
+
+//$router->startRouter();

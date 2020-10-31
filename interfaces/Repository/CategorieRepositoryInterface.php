@@ -9,7 +9,7 @@ namespace Syrgoma\Ski\Interfaces\Repository;
 
 use Syrgoma\Ski\Entity\Categorie;
 
-interface CategorieRepository
+interface CategorieRepositoryInterface
 {
     /**
      * Find a Categorie entity by his id

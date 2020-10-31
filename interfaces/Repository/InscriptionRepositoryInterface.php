@@ -12,7 +12,7 @@ use Syrgoma\Ski\Entity\Epreuve;
 use Syrgoma\Ski\Entity\Inscription;
 use Syrgoma\Ski\Entity\Participant;
 
-interface InscriptionRepository
+interface InscriptionRepositoryInterface
 {
     /**
      * Find a Inscription entity by his id
