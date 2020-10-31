@@ -8,6 +8,8 @@
 namespace Syrgoma\Ski\Entity;
 
 use Carbon\Traits\Date;
+use Syrgoma\Ski\Exception\BadObjectException;
+use Syrgoma\Ski\Exception\BadTypeException;
 
 class Epreuve
 {
@@ -15,6 +17,31 @@ class Epreuve
     private string $lieu;
     private Date $date;
     private array $participants;
+
+    public function setEpreuveLieu(string $lieu): void
+    {
+        $this->lieu = $lieu;
+    }
+
+    public function setEpreuveDate(Date $date): void
+    {
+        $this->date = $date;
+    }
+
+    public function setEpreuveParticipants(array $participantsList): void
+    {
+        if (!empty($participantsList)) {
+            foreach ($participantsList as $participant) {
+                if (!is_object($participant)) {
+                    throw new BadTypeException("Error, $participant is not an object");
+                }
+                if (!get_class($participant) === Participant::class) {
+                    throw new BadObjectException("Error, $participant is not a Participant object");
+                }
+            }
+        }
+        $this->participants = $participantsList;
+    }
 
     public function getEpreuveId(): ?int
     {
