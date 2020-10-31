@@ -12,6 +12,11 @@ class Categorie
     private int $id;
     private string $name;
 
+    public function setCategorieName(string $categorieName): void
+    {
+        $this->name = $categorieName;
+    }
+
     public function getCategorieId(): ?int
     {
         return $this->id;
