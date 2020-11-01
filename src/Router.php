@@ -146,11 +146,18 @@ class Router
 
             $response = $webPage->showPage($parameters);
         } catch (ResourceNotFoundException $e) {
+
             error_log($e->getMessage());
-            $response = new NotFoundController();
+
+            $webPage = new NotFoundController();
+
+            $response = $webPage->showPage();
         } catch (Exception $e) {
             error_log($e->getMessage());
-            $response = new ErrorController();
+
+            $webPage = new ErrorController();
+
+            $response = $webPage->showPage();
         }
 
         /** @var Response $response */
