@@ -142,9 +142,9 @@ class Router
             $controller = $parameters['_controller'];
             unset($parameters['_controller']);
 
-            $pageResult = new $controller();
+            $webPage = new $controller();
 
-            $response = $pageResult->showPage($parameters);
+            $response = $webPage->showPage($parameters);
         } catch (ResourceNotFoundException $e) {
             error_log($e->getMessage());
             $response = new NotFoundController();
