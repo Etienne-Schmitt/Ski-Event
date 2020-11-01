@@ -26,6 +26,7 @@ class CategorieRepository implements CategorieRepositoryInterface
         $sql           = "SELECT nom FROM categories WHERE id = ?";
         $categorieName = $this->db->runOne($sql, [$categorieId])['nom'];
 
+        /** Overkill but will stay here for learning confirmation */
         return CategorieFactory::buildNewFromFactory($categorieId, $categorieName);
     }
 
