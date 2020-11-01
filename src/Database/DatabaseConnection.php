@@ -19,32 +19,32 @@ class DatabaseConnection
         $this->db = $db;
     }
 
-    public function runOneSQL(string $sql): array
+    public function obtainOneElementSQL(string $sql): array
     {
-        return $this->runSQL($sql)->fetch();
+        return $this->executeSQL($sql)->fetch();
     }
 
-    public function runArraySQL(string $sql): array
+    public function obtainArrayElementSQL(string $sql): array
     {
-        return $this->runSQL($sql)->fetchAll();
+        return $this->executeSQL($sql)->fetchAll();
     }
 
-    public function runOneSQLParams(string $sql, array $params): array
+    public function obtainOneElementSQLWithParams(string $sql, array $params): array
     {
-        return $this->runSQLParams($sql, $params)->fetch();
+        return $this->executeSQLWithParams($sql, $params)->fetch();
     }
 
-    public function runArraySQLParams(string $sql, array $params): array
+    public function obtainArrayElementSQLWithParams(string $sql, array $params): array
     {
-        return $this->runSQLParams($sql, $params)->fetchAll();
+        return $this->executeSQLWithParams($sql, $params)->fetchAll();
     }
 
-    private function runSQL(string $sql): PDOStatement
+    public function executeSQL(string $sql): PDOStatement
     {
         return $this->db->query($sql);
     }
 
-    private function runSQLParams(string $sql, array $params): PDOStatement
+    public function executeSQLWithParams(string $sql, array $params): PDOStatement
     {
         $sth = $this->db->prepare($sql);
         $sth->execute($params);

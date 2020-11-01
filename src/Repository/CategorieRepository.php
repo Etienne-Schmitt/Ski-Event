@@ -24,7 +24,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     public function findOneCategorie(int $categorieId): ?Categorie
     {
         $sql           = "SELECT nom FROM categories WHERE id = ?";
-        $categorieName = $this->db->runOneSQLParams($sql, [$categorieId])['nom'];
+        $categorieName = $this->db->obtainOneElementSQLWithParams($sql, [$categorieId])['nom'];
 
         /** Overkill but will stay here for learning confirmation */
         return CategorieFactory::buildNewFromFactory($categorieId, $categorieName);
@@ -34,7 +34,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         $sql = "SELECT id, nom FROM categories ORDER BY id";
 
-        $arrayListCategorie = $this->db->runArraySQL($sql);
+        $arrayListCategorie = $this->db->obtainArrayElementSQL($sql);
         $arrayCategorie     = [];
 
         /** @var array $categorie */
@@ -49,7 +49,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         $sql = "SELECT id, nom FROM categories WHERE nom = ?";
 
-        $categorieDetail = $this->db->runArraySQLParams($sql, [$criteria]);
+        $categorieDetail = $this->db->obtainArrayElementSQLWithParams($sql, [$criteria]);
 
         return new Categorie($categorieDetail['id'], $categorieDetail['nom']);
     }
