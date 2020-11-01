@@ -11,14 +11,34 @@ use Carbon\Traits\Date;
 
 class Participant
 {
-    private int $id;
-
-    private string $nom;
-    private string $prenom;
-    private Date $dateDeNaissance;
-    private string $cheminPhoto;
+    private int       $id;
+    private string    $nom;
+    private string    $prenom;
+    private Date      $dateDeNaissance;
+    private string    $email;
+    private string    $cheminPhoto;
     private Categorie $categorie;
-    private Profil $profil;
+    private Profil    $profil;
+
+    public function __construct(
+        int $id,
+        string $nom,
+        string $prenom,
+        Date $dateDeNaissance,
+        string $email,
+        string $cheminPhoto,
+        Categorie $categorie,
+        Profil $profil
+    ) {
+        $this->id              = $id;
+        $this->nom             = $nom;
+        $this->prenom          = $prenom;
+        $this->dateDeNaissance = $dateDeNaissance;
+        $this->email           = $email;
+        $this->cheminPhoto     = $cheminPhoto;
+        $this->categorie       = $categorie;
+        $this->profil          = $profil;
+    }
 
     public function getParticipantId(): int
     {
@@ -33,6 +53,11 @@ class Participant
     public function getParticipantPrenom(): string
     {
         return $this->prenom;
+    }
+
+    public function getParticipantEmail(): string
+    {
+        return $this->email;
     }
 
     public function getParticipantDateDeNaissance(): Date
