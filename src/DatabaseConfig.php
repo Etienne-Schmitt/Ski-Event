@@ -25,27 +25,21 @@ class DatabaseConfig implements DatabaseConfigInterface
     /**
      * ConfigDb constructor
      *
-     * @param string $dbDriver        Database driver to use
-     * @param string $host            Ip/dns of the database server
-     * @param string $port
-     * @param string $database        Database name
-     * @param string $charset
-     * @param string $user            Database allowed used
-     * @param string $password        Database password for user
-     * @param array  $availableDriver List of all driver available on the system
+     * @param array $dbConfig        Database config to use
+     * @param array $availableDriver List of all driver available on the system
      *
      * @throws DriverNotFoundException
      */
-    public function __construct(
-        string $dbDriver,
-        string $host,
-        string $port,
-        string $database,
-        string $charset,
-        string $user,
-        string $password,
-        array $availableDriver
-    ) {
+    public function __construct(array $dbConfig, array $availableDriver)
+    {
+        $dbDriver = $dbConfig["driver"];
+        $host     = $dbConfig["host"];
+        $port     = $dbConfig["port"];
+        $database = $dbConfig["database"];
+        $charset  = $dbConfig["charset"];
+        $user     = $dbConfig["user"];
+        $password = $dbConfig["password"];
+
         if (!in_array($dbDriver, $availableDriver, true)) {
             throw new DriverNotFoundException("Not a valid database driver : $dbDriver");
         }
