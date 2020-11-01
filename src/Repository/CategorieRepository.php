@@ -61,9 +61,17 @@ class CategorieRepository implements CategorieRepositoryInterface
         $this->db->executeSQLWithParams($sql, [$categorie]);
     }
 
-    public function editCategorie(Categorie $categorie, ?string $newCategorie): void
+    public function editCategorie(Categorie $categorie, string $newCategorieName): void
     {
-        // TODO: Implement editCategorie() method.
+        $sql = "UPDATE categories SET nom = ? WHERE id = ?";
+
+        $this->db->executeSQLWithParams(
+            $sql,
+            [
+                $newCategorieName,
+                $categorie->getCategorieId(),
+            ]
+        );
     }
 
     public function deleteCategorie(Categorie $categorie): void

@@ -48,12 +48,12 @@ interface CategorieRepositoryInterface
     /**
      * Edit an existing Categorie entity
      *
-     * @param Categorie   $categorie
-     * @param string|null $newCategorie
+     * @param Categorie $categorie
+     * @param string    $newCategorieName
      */
     public function editCategorie(
         Categorie $categorie,
-        ?string $newCategorie
+        string $newCategorieName
     ): void;
 
     /**
