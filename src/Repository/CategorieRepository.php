@@ -47,7 +47,11 @@ class CategorieRepository implements CategorieRepositoryInterface
 
     public function findOneCategorieByName(string $criteria): Categorie
     {
-        // TODO: Implement findOneCategorieByName() method.
+        $sql = "SELECT id, nom FROM categories WHERE nom = ?";
+
+        $categorieDetail = $this->db->runArraySQLParams($sql, [$criteria]);
+
+        return new Categorie($categorieDetail['id'], $categorieDetail['nom']);
     }
 
     public function addCategorie(string $categorie): void
