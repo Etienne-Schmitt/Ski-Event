@@ -56,7 +56,9 @@ class CategorieRepository implements CategorieRepositoryInterface
 
     public function addCategorie(string $categorie): void
     {
-        // TODO: Implement addCategorie() method.
+        $sql = "INSERT INTO categories (nom) VALUES (?)";
+
+        $this->db->executeSQLWithParams($sql, [$categorie]);
     }
 
     public function editCategorie(Categorie $categorie, ?string $newCategorie): void
