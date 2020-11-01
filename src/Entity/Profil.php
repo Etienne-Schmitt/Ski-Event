@@ -9,8 +9,19 @@ namespace Syrgoma\Ski\Entity;
 
 class Profil
 {
-    private int $id;
+    private int    $id;
     private string $name;
+
+    public function __construct(int $id, string $name)
+    {
+        $this->id   = $id;
+        $this->name = $name;
+    }
+
+    public function setProfilName(string $name): void
+    {
+        $this->name = $name;
+    }
 
     public function getProfilId(): ?int
     {
