@@ -76,6 +76,8 @@ class CategorieRepository implements CategorieRepositoryInterface
 
     public function deleteCategorie(Categorie $categorie): void
     {
-        // TODO: Implement deleteCategorie() method.
+        $sql = "DELETE FROM categories WHERE id = ?";
+
+        $this->db->executeSQLWithParams($sql, [$categorie->getCategorieId()]);
     }
 }
