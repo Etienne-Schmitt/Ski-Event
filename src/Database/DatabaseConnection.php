@@ -18,7 +18,23 @@ class DatabaseConnection
         $this->db = $db;
     }
 
-    public function run(string $sql, array $args = []): array
+    public function runOne(string $sql, array $args = []): array
+    {
+        if (empty($args)) {
+            /**
+             * Use PDO::query() is not a good idea, but because
+             * we don't have arguments we can do it instead right now
+             * instead of preparing and then executing later
+             */
+            return $this->db->query($sql)->fetch();
+        }
+        $sth = $this->db->prepare($sql);
+        $sth->execute($args);
+
+        return $sth->fetch();
+    }
+
+    public function runArray(string $sql, array $args = []): array
     {
         if (empty($args)) {
             /**
