@@ -5,7 +5,7 @@
  * @license GPL 2.0 or any later
  */
 
-namespace Syrgoma\Ski;
+namespace Syrgoma\Ski\Database;
 
 use Syrgoma\Ski\Exception\DriverNotFoundException;
 use Syrgoma\Ski\Interfaces\DatabaseConfigInterface;

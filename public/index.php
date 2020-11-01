@@ -2,7 +2,8 @@
 
 use Syrgoma\Ski\Controller\IndexController;
 use Syrgoma\Ski\Controller\TestController;
-use Syrgoma\Ski\DatabaseConfig;
+use Syrgoma\Ski\Database\DatabaseConfig;
+use Syrgoma\Ski\Database\DatabaseConnection;
 use Syrgoma\Ski\Exception\ConfigurationException;
 use Syrgoma\Ski\Router;
 
@@ -17,7 +18,10 @@ if (!file_exists(__DIR__ . "/../config.php")) {
  */
 require_once __DIR__ . "/../config.php";
 
-$dbConfig = new DatabaseConfig($externalConfig['database'], PDO::getAvailableDrivers());
+$dbConfig  = new DatabaseConfig($externalConfig['database'], PDO::getAvailableDrivers());
+$pdoObject = new PDO($dbConfig->getDsn(), $dbConfig->getUser(), $dbConfig->getPassword());
+
+$db = new DatabaseConnection($pdoObject);
 
 $router = Router::getRouterInstance();
 
