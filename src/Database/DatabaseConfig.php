@@ -28,8 +28,7 @@ class DatabaseConfig implements DatabaseConfigInterface
      *
      * @param array $dbConfig        Database config to use
      * @param array $availableDriver List of all driver available on the system
-     *
-     * @throws DriverNotFoundException
+     * @param array $dbOptions
      */
     public function __construct(array $dbConfig, array $availableDriver, array $dbOptions)
     {
