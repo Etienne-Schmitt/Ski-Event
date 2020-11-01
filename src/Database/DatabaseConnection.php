@@ -8,7 +8,6 @@
 namespace Syrgoma\Ski\Database;
 
 use PDO;
-use PDOStatement;
 
 class DatabaseConnection
 {
@@ -19,7 +18,7 @@ class DatabaseConnection
         $this->db = $db;
     }
 
-    public function run(string $sql, array $args = []): PDOStatement
+    public function run(string $sql, array $args = []): array
     {
         if (empty($args)) {
             /**
@@ -27,11 +26,11 @@ class DatabaseConnection
              * we don't have arguments we can do it instead right now
              * instead of preparing and then executing later
              */
-            return $this->db->query($sql);
+            return $this->db->query($sql)->fetchAll();
         }
         $sth = $this->db->prepare($sql);
         $sth->execute($args);
 
-        return $sth;
+        return $sth->fetchAll();
     }
 }
