@@ -21,6 +21,7 @@ class DatabaseConfig implements DatabaseConfigInterface
     private string $dsn;
     private string $user;
     private string $password;
+    private array  $options;
 
     /**
      * ConfigDb constructor
@@ -30,7 +31,7 @@ class DatabaseConfig implements DatabaseConfigInterface
      *
      * @throws DriverNotFoundException
      */
-    public function __construct(array $dbConfig, array $availableDriver)
+    public function __construct(array $dbConfig, array $availableDriver, array $dbOptions)
     {
         $dbDriver = $dbConfig["driver"];
         $host     = $dbConfig["host"];
@@ -47,6 +48,7 @@ class DatabaseConfig implements DatabaseConfigInterface
         $this->dsn      = "$dbDriver:dbname=$database;host=$host;port=$port;charset=$charset";
         $this->user     = $user;
         $this->password = $password;
+        $this->options  = $dbOptions;
     }
 
     /**
@@ -79,5 +81,10 @@ class DatabaseConfig implements DatabaseConfigInterface
     public function getDsn(): string
     {
         return $this->dsn;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 }

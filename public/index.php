@@ -18,8 +18,18 @@ if (!file_exists(__DIR__ . "/../config.php")) {
  */
 require_once __DIR__ . "/../config.php";
 
-$dbConfig  = new DatabaseConfig($externalConfig['database'], PDO::getAvailableDrivers());
-$pdoObject = new PDO($dbConfig->getDsn(), $dbConfig->getUser(), $dbConfig->getPassword());
+$driverOptions = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+$dbConfig = new DatabaseConfig(
+    $externalConfig['database'],
+    PDO::getAvailableDrivers(),
+    $driverOptions
+);
+
+$pdoObject = new PDO($dbConfig->getDsn(), $dbConfig->getUser(), $dbConfig->getPassword(), $dbConfig->getOptions());
 
 $db = new DatabaseConnection($pdoObject);
 

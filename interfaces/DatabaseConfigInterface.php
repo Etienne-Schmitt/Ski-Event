@@ -36,4 +36,11 @@ interface DatabaseConfigInterface
      * @return string
      */
     public function getPassword(): string;
+
+    /**
+     * Will return the correct options for PDO
+     *
+     * @return array
+     */
+    public function getOptions(): array;
 }
