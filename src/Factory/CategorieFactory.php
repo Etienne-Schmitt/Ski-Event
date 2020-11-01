@@ -11,7 +11,7 @@ use Syrgoma\Ski\Entity\Categorie;
 
 class CategorieFactory
 {
-    public static function categorieFactory(int $categorieId, string $categorieName): Categorie
+    public static function buildNewFromFactory(int $categorieId, string $categorieName): Categorie
     {
         return new Categorie($categorieId, $categorieName);
     }
