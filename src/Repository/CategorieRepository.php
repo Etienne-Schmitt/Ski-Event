@@ -32,7 +32,17 @@ class CategorieRepository implements CategorieRepositoryInterface
 
     public function findAllCategorie(): array
     {
-        // TODO: Implement findAllCategorie() method.
+        $sql = "SELECT id, nom FROM categories ORDER BY id";
+
+        $arrayListCategorie = $this->db->runArray($sql);
+        $arrayCategorie     = [];
+
+        /** @var array $categorie */
+        foreach ($arrayListCategorie as $categorie) {
+            $arrayCategorie[] = new Categorie($categorie['id'], $categorie['nom']);
+        }
+
+        return $arrayCategorie;
     }
 
     public function findOneCategorieByName(string $criteria): Categorie
