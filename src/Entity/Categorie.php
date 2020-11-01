@@ -18,6 +18,11 @@ class Categorie
         $this->name = $categorieName;
     }
 
+    public static function buildNewCategorie(int $id, string $nom): Categorie
+    {
+        return new Categorie($id, $nom);
+    }
+
     public function setCategorieName(string $categorieName): void
     {
         $this->name = $categorieName;
