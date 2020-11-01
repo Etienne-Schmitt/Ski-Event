@@ -8,6 +8,7 @@
 namespace Syrgoma\Ski\Database;
 
 use PDO;
+use PDOStatement;
 
 class DatabaseConnection
 {
@@ -18,35 +19,36 @@ class DatabaseConnection
         $this->db = $db;
     }
 
-    public function runOne(string $sql, array $args = []): array
+    public function runOneSQL(string $sql): array
     {
-        if (empty($args)) {
-            /**
-             * Use PDO::query() is not a good idea, but because
-             * we don't have arguments we can do it instead right now
-             * instead of preparing and then executing later
-             */
-            return $this->db->query($sql)->fetch();
-        }
-        $sth = $this->db->prepare($sql);
-        $sth->execute($args);
-
-        return $sth->fetch();
+        return $this->runSQL($sql)->fetch();
     }
 
-    public function runArray(string $sql, array $args = []): array
+    public function runArraySQL(string $sql): array
     {
-        if (empty($args)) {
-            /**
-             * Use PDO::query() is not a good idea, but because
-             * we don't have arguments we can do it instead right now
-             * instead of preparing and then executing later
-             */
-            return $this->db->query($sql)->fetchAll();
-        }
-        $sth = $this->db->prepare($sql);
-        $sth->execute($args);
+        return $this->runSQL($sql)->fetchAll();
+    }
 
-        return $sth->fetchAll();
+    public function runOneSQLParams(string $sql, array $params): array
+    {
+        return $this->runSQLParams($sql, $params)->fetch();
+    }
+
+    public function runArraySQLParams(string $sql, array $params): array
+    {
+        return $this->runSQLParams($sql, $params)->fetchAll();
+    }
+
+    private function runSQL(string $sql): PDOStatement
+    {
+        return $this->db->query($sql);
+    }
+
+    private function runSQLParams(string $sql, array $params): PDOStatement
+    {
+        $sth = $this->db->prepare($sql);
+        $sth->execute($params);
+
+        return $sth;
     }
 }
