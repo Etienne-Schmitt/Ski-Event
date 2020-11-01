@@ -8,7 +8,6 @@
 namespace Syrgoma\Ski;
 
 use Exception;
-use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -18,11 +17,11 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Syrgoma\Ski\Controller\ErrorController;
 use Syrgoma\Ski\Controller\NotFoundController;
+use Syrgoma\Ski\Interfaces\Controller\ControllerInterface;
 
 /**
  * Class Router
  * Only one instance allowed
- *
  * A router class for routing requests
  *
  * @package Syrgoma\Ski
@@ -55,6 +54,7 @@ class Router
         if (self::$routerInstance === null) {
             self::$routerInstance = new self();
         }
+
         return self::$routerInstance;
     }
 
@@ -63,7 +63,7 @@ class Router
      *
      * @return void
      */
-    protected function __wakeup()
+    protected function __wakeup(): void
     {
     }
 
@@ -106,8 +106,9 @@ class Router
         array $otherRouteSettings = null
     ): void {
         $newRoute = new Route($path, [
-            "_controller" => $controllerName
-        ]);
+                "_controller" => $controllerName,
+            ]
+        );
 
         if ($otherRouteSettings !== null) {
             foreach ($otherRouteSettings as $optionName => $optionValue) {
@@ -134,23 +135,31 @@ class Router
             $parameters = $urlMatcher->match($context->getPathInfo());
 
             if (!isset($parameters['_controller'])) {
-                throw new RuntimeException("Error: Controller not specified");
+                throw new ResourceNotFoundException("Error: Controller not found");
             }
+
+            /** @var ControllerInterface $controller */
             $controller = $parameters['_controller'];
             unset($parameters['_controller']);
 
-            $pageResult = new $controller();
+            $webPage = new $controller();
 
-            $response = $pageResult->showPage($parameters);
+            $response = $webPage->showPage($parameters);
         } catch (ResourceNotFoundException $e) {
+
             error_log($e->getMessage());
-            $response = new NotFoundController();
+
+            $webPage = new NotFoundController();
+
+            $response = $webPage->showPage();
         } catch (Exception $e) {
             error_log($e->getMessage());
-            $response = new ErrorController();
+
+            $webPage = new ErrorController();
+
+            $response = $webPage->showPage();
         }
 
-        /** @var Response $response */
         return $response->send();
     }
 }
