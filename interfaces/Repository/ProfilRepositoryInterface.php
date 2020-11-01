@@ -62,4 +62,11 @@ interface ProfilRepositoryInterface
      * @param Profil $profil
      */
     public function deleteProfil(Profil $profil): void;
+
+    /**
+     * Return the number of Profil
+     *
+     * @return int number of Profil
+     */
+    public function countProfil(): int;
 }

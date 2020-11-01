@@ -98,4 +98,11 @@ interface ParticipantRepositoryInterface
      * @param Participant $participant
      */
     public function deleteParticipant(Participant $participant): void;
+
+    /**
+     * Return the number of Participant
+     *
+     * @return int number of Participant
+     */
+    public function countParticipant(): int;
 }

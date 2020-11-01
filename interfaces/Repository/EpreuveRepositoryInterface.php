@@ -80,4 +80,11 @@ interface EpreuveRepositoryInterface
      * @param Epreuve $epreuve
      */
     public function deleteEpreuve(Epreuve $epreuve): void;
+
+    /**
+     * Return the number of Epreuve
+     *
+     * @return int number of Epreuve
+     */
+    public function countEpreuve(): int;
 }

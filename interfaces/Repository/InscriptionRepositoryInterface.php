@@ -86,4 +86,11 @@ interface InscriptionRepositoryInterface
      * @param Inscription $inscription
      */
     public function deleteInscription(Inscription $inscription): void;
+
+    /**
+     * Return the number of Inscription
+     *
+     * @return int number of Inscription
+     */
+    public function countInscription(): int;
 }

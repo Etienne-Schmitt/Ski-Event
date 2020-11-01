@@ -62,4 +62,11 @@ interface CategorieRepositoryInterface
      * @param Categorie $categorie
      */
     public function deleteCategorie(Categorie $categorie): void;
+
+    /**
+     * Return the number of Categorie
+     *
+     * @return int Number of Categorie
+     */
+    public function countCategorie(): int;
 }
