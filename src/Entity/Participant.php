@@ -79,4 +79,39 @@ class Participant
     {
         return $this->profil;
     }
+
+    public function setParticipantPrenom(string $prenom): void
+    {
+        $this->prenom = $prenom;
+    }
+
+    public function setParticipantDateDeNaissance(Date $dateDeNaissance): void
+    {
+        $this->dateDeNaissance = $dateDeNaissance;
+    }
+
+    public function setParticipantEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setParticipantCheminPhoto(string $cheminPhoto): void
+    {
+        $this->cheminPhoto = $cheminPhoto;
+    }
+
+    public function setParticipantCategorie(Categorie $categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+
+    public function setParticipantProfil(Profil $profil): void
+    {
+        $this->profil = $profil;
+    }
+
+    public function setParticipantNom(string $nom): void
+    {
+        $this->nom = $nom;
+    }
 }
