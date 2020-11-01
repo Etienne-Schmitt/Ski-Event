@@ -9,8 +9,14 @@ namespace Syrgoma\Ski\Entity;
 
 class Categorie
 {
-    private int $id;
+    private int    $id;
     private string $name;
+
+    public function __construct(int $categorieId, string $categorieName)
+    {
+        $this->id   = $categorieId;
+        $this->name = $categorieName;
+    }
 
     public function setCategorieName(string $categorieName): void
     {
