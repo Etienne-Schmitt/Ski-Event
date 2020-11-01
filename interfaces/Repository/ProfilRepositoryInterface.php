@@ -48,12 +48,12 @@ interface ProfilRepositoryInterface
     /**
      * Edit an existing Profil entity
      *
-     * @param Profil      $profil
-     * @param string|null $newProfil
+     * @param Profil $profil
+     * @param string $newProfilName
      */
     public function editProfil(
         Profil $profil,
-        ?string $newProfil
+        string $newProfilName
     ): void;
 
     /**
