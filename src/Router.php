@@ -160,7 +160,6 @@ class Router
             $response = $webPage->showPage();
         }
 
-        /** @var Response $response */
         return $response->send();
     }
 }
