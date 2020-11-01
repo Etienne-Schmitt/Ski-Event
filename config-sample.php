@@ -7,7 +7,7 @@
 
 namespace Syrgoma\Ski\Config;
 
-$databaseConfig = [
+$externalConfig['database'] = [
 
     /**
      * Driver used when connecting to the database :

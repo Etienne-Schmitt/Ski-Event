@@ -12,12 +12,12 @@ if (!file_exists(__DIR__ . "/../config.php")) {
     throw new ConfigurationException("No config.php found, please create it...");
 }
 
+/**
+ * @var array $externalConfig defined in config.php
+ */
 require_once __DIR__ . "/../config.php";
-if (isset($databaseConfig)) {
-    $dbConfig = new DatabaseConfig($databaseConfig, PDO::getAvailableDrivers());
-} else {
-    throw new ConfigurationException("Error, the config.php file is not at the correct format...");
-}
+
+$dbConfig = new DatabaseConfig($externalConfig['database'], PDO::getAvailableDrivers());
 
 $router = Router::getRouterInstance();
 
