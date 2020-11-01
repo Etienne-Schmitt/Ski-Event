@@ -78,4 +78,11 @@ class ProfilRepository implements ProfilRepositoryInterface
 
         $this->db->executeSQLWithParams($sql, [$profil->getProfilId()]);
     }
+
+    public function countProfil(): int
+    {
+        $sql = "SELECT COUNT(*) FROM profils";
+
+        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
+    }
 }

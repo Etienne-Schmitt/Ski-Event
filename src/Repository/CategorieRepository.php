@@ -80,4 +80,11 @@ class CategorieRepository implements CategorieRepositoryInterface
 
         $this->db->executeSQLWithParams($sql, [$categorie->getCategorieId()]);
     }
+
+    public function countCategorie(): int
+    {
+        $sql = "SELECT COUNT(*) FROM categories";
+
+        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
+    }
 }
