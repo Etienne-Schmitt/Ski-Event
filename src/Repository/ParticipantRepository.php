@@ -8,6 +8,7 @@
 namespace Syrgoma\Ski\Repository;
 
 use Carbon\Carbon;
+use Syrgoma\Ski\Database\DatabaseConnection;
 use Syrgoma\Ski\Entity\Categorie;
 use Syrgoma\Ski\Entity\Participant;
 use Syrgoma\Ski\Entity\Profil;
@@ -15,6 +16,13 @@ use Syrgoma\Ski\Interfaces\Repository\ParticipantRepositoryInterface;
 
 class ParticipantRepository implements ParticipantRepositoryInterface
 {
+    private DatabaseConnection $db;
+
+    public function __construct(DatabaseConnection $db)
+    {
+        $this->db = $db;
+    }
+
     public function findOneParticipant(int $participantId): ?Participant
     {
         // TODO: Implement findOneParticipant() method.
