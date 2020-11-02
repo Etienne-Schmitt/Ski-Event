@@ -37,9 +37,20 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         return ParticipantFactory::buildNewParticipantFromFactory($participant, $this->db);
     }
 
+    /**
+     * @throws Exception
+     */
     public function findAllParticipant(): array
     {
-        // TODO: Implement findAllParticipant() method.
+        $sql          = "SELECT * FROM participants";
+        $participants = $this->db->obtainArrayElementSQL($sql);
+
+        $allParticipants = [];
+        foreach ($participants as $participant) {
+            $allParticipants[] = ParticipantFactory::buildNewParticipantFromFactory($participant, $this->db);
+        }
+
+        return $allParticipants;
     }
 
     public function findParticipantBy(array $criteria): array
