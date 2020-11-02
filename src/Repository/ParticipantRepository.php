@@ -67,6 +67,8 @@ class ParticipantRepository implements ParticipantRepositoryInterface
 
     public function countParticipant(): int
     {
-        // TODO: Implement countParticipant() method.
+        $sql = "SELECT COUNT(*) FROM participants";
+
+        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
     }
 }
