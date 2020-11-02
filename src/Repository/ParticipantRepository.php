@@ -15,41 +15,26 @@ use Syrgoma\Ski\Interfaces\Repository\ParticipantRepositoryInterface;
 
 class ParticipantRepository implements ParticipantRepositoryInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function findOneParticipant(int $participantId): ?Participant
     {
         // TODO: Implement findOneParticipant() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function findAllParticipant(): array
     {
         // TODO: Implement findAllParticipant() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function findParticipantBy(array $criteria): array
     {
         // TODO: Implement findParticipantBy() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function findOneParticipantBy(array $criteria): ?Participant
     {
         // TODO: Implement findOneParticipantBy() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function addParticipant(
         string $nom,
         string $prenom,
@@ -62,9 +47,6 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         // TODO: Implement addParticipant() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function editParticipant(
         Participant $participant,
         ?string $nom,
@@ -78,16 +60,11 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         // TODO: Implement editParticipant() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function deleteParticipant(Participant $participant): void
     {
         // TODO: Implement deleteParticipant() method.
     }
-    /**
-     * @inheritdoc
-     */
+
     public function countParticipant(): int
     {
         // TODO: Implement countParticipant() method.
