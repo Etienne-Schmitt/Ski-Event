@@ -7,7 +7,7 @@
 
 namespace Syrgoma\Ski\Entity;
 
-use Carbon\Traits\Date;
+use Carbon\Carbon;
 use Syrgoma\Ski\Exception\BadObjectException;
 use Syrgoma\Ski\Exception\BadTypeException;
 
@@ -15,7 +15,7 @@ class Epreuve
 {
     private int $id;
     private string $lieu;
-    private Date $date;
+    private Carbon $date;
     private array $participants;
 
     public function setEpreuveLieu(string $lieu): void
@@ -23,7 +23,7 @@ class Epreuve
         $this->lieu = $lieu;
     }
 
-    public function setEpreuveDate(Date $date): void
+    public function setEpreuveDate(Carbon $date): void
     {
         $this->date = $date;
     }
@@ -53,7 +53,7 @@ class Epreuve
         return $this->lieu;
     }
 
-    public function getEpreuveDate(): ?Date
+    public function getEpreuveDate(): ?Carbon
     {
         return $this->date;
     }

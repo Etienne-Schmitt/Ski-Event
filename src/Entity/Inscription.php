@@ -7,16 +7,15 @@
 
 namespace Syrgoma\Ski\Entity;
 
-use Carbon\Traits\Date;
+use Carbon\Carbon;
 
 class Inscription
 {
-    private int $id;
+    private int         $id;
     private Participant $participant;
-    private Epreuve $epreuve;
-
-    private Date $passage1;
-    private Date $passage2;
+    private Epreuve     $epreuve;
+    private Carbon      $passage1;
+    private Carbon      $passage2;
 
     public function getId(): int
     {
@@ -33,12 +32,12 @@ class Inscription
         return $this->epreuve;
     }
 
-    public function getPassage1(): Date
+    public function getPassage1(): Carbon
     {
         return $this->passage1;
     }
 
-    public function getPassage2(): Date
+    public function getPassage2(): Carbon
     {
         return $this->passage2;
     }

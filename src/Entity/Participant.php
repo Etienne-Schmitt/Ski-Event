@@ -7,14 +7,14 @@
 
 namespace Syrgoma\Ski\Entity;
 
-use Carbon\Traits\Date;
+use Carbon\Carbon;
 
 class Participant
 {
     private int       $id;
     private string    $nom;
     private string    $prenom;
-    private Date      $dateDeNaissance;
+    private Carbon    $dateDeNaissance;
     private string    $email;
     private string    $cheminPhoto;
     private Categorie $categorie;
@@ -24,7 +24,7 @@ class Participant
         int $id,
         string $nom,
         string $prenom,
-        Date $dateDeNaissance,
+        Carbon $dateDeNaissance,
         string $email,
         string $cheminPhoto,
         Categorie $categorie,
@@ -60,7 +60,7 @@ class Participant
         return $this->email;
     }
 
-    public function getParticipantDateDeNaissance(): Date
+    public function getParticipantDateDeNaissance(): Carbon
     {
         return $this->dateDeNaissance;
     }
@@ -85,7 +85,7 @@ class Participant
         $this->prenom = $prenom;
     }
 
-    public function setParticipantDateDeNaissance(Date $dateDeNaissance): void
+    public function setParticipantDateDeNaissance(Carbon $dateDeNaissance): void
     {
         $this->dateDeNaissance = $dateDeNaissance;
     }

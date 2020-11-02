@@ -7,7 +7,7 @@
 
 namespace Syrgoma\Ski\Interfaces\Repository;
 
-use Carbon\Traits\Date;
+use Carbon\Carbon;
 use Syrgoma\Ski\Entity\Categorie;
 use Syrgoma\Ski\Entity\Participant;
 use Syrgoma\Ski\Entity\Profil;
@@ -53,7 +53,7 @@ interface ParticipantRepositoryInterface
      *
      * @param string    $nom
      * @param string    $prenom
-     * @param Date      $dateDeNaissance
+     * @param Carbon    $dateDeNaissance
      * @param string    $email
      * @param string    $cheminPhoto
      * @param Categorie $categorie
@@ -62,7 +62,7 @@ interface ParticipantRepositoryInterface
     public function addParticipant(
         string $nom,
         string $prenom,
-        Date $dateDeNaissance,
+        Carbon $dateDeNaissance,
         string $email,
         string $cheminPhoto,
         Categorie $categorie,
@@ -75,7 +75,7 @@ interface ParticipantRepositoryInterface
      * @param Participant    $participant
      * @param string|null    $nom
      * @param string|null    $prenom
-     * @param Date|null      $dateDeNaissance
+     * @param Carbon|null    $dateDeNaissance
      * @param string|null    $email
      * @param string|null    $cheminPhoto
      * @param Categorie|null $categorie
@@ -85,7 +85,7 @@ interface ParticipantRepositoryInterface
         Participant $participant,
         ?string $nom,
         ?string $prenom,
-        ?Date $dateDeNaissance,
+        ?Carbon $dateDeNaissance,
         ?string $email,
         ?string $cheminPhoto,
         ?Categorie $categorie,
