@@ -8,10 +8,12 @@
 namespace Syrgoma\Ski\Repository;
 
 use Carbon\Carbon;
+use Exception;
 use Syrgoma\Ski\Database\DatabaseConnection;
 use Syrgoma\Ski\Entity\Categorie;
 use Syrgoma\Ski\Entity\Participant;
 use Syrgoma\Ski\Entity\Profil;
+use Syrgoma\Ski\Factory\ParticipantFactory;
 use Syrgoma\Ski\Interfaces\Repository\ParticipantRepositoryInterface;
 
 class ParticipantRepository implements ParticipantRepositoryInterface
@@ -23,9 +25,16 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         $this->db = $db;
     }
 
+    /**
+     * @inheritdoc
+     * @throws Exception
+     */
     public function findOneParticipant(int $participantId): ?Participant
     {
-        // TODO: Implement findOneParticipant() method.
+        $sql         = "SELECT * FROM participants WHERE id = ?";
+        $participant = $this->db->obtainOneElementSQLWithParams($sql, [$participantId]);
+
+        return ParticipantFactory::buildNewParticipantFromFactory($participant, $this->db);
     }
 
     public function findAllParticipant(): array
