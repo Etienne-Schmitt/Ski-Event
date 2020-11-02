@@ -27,26 +27,26 @@ class ParticipantFactory
     {
 
         $categorieParticipantSql     = "SELECT categorie_id FROM participants_categorie WHERE participant_id = ?";
-        $categorieParticipantRequest = $db->obtainOneElementSQLWithParams(
+        $categorieParticipantRequest = $db->findOneInDBWithParams(
             $categorieParticipantSql,
             [$participant['id']]
         );
 
         $categorieSql     = "SELECT * FROM categories WHERE id = ?";
-        $categorieRequest = $db->obtainOneElementSQLWithParams(
+        $categorieRequest = $db->findOneInDBWithParams(
             $categorieSql,
             [$categorieParticipantRequest['categorie_id']]
         );
         $categorie        = new Categorie($categorieRequest['id'], $categorieRequest['nom']);
 
         $profilParticipantSql     = "SELECT profil_id FROM participants_profil WHERE participant_id = ?";
-        $profilParticipantRequest = $db->obtainOneElementSQLWithParams(
+        $profilParticipantRequest = $db->findOneInDBWithParams(
             $profilParticipantSql,
             [$participant['id']]
         );
 
         $profilSql     = "SELECT * FROM categories WHERE id = ?";
-        $profilRequest = $db->obtainOneElementSQLWithParams(
+        $profilRequest = $db->findOneInDBWithParams(
             $profilSql,
             [$profilParticipantRequest['profil_id']]
         );

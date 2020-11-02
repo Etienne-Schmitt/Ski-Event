@@ -23,7 +23,7 @@ class ProfilRepository implements ProfilRepositoryInterface
     public function findOneProfil(int $profilId): ?Profil
     {
         $sql        = "SELECT nom FROM profils WHERE id = ?";
-        $profilName = $this->db->obtainOneElementSQLWithParams($sql, [$profilId]);
+        $profilName = $this->db->findOneInDBWithParams($sql, [$profilId]);
 
         return new Profil($profilName['id'], $profilName['nom']);
     }
@@ -32,7 +32,7 @@ class ProfilRepository implements ProfilRepositoryInterface
     {
         $sql = "SELECT id, nom FROM profils ORDER BY id";
 
-        $arrayListProfil = $this->db->obtainArrayElementSQL($sql);
+        $arrayListProfil = $this->db->findAllInDB($sql);
         $arrayProfil     = [];
 
         /** @var array $profil */
@@ -47,7 +47,7 @@ class ProfilRepository implements ProfilRepositoryInterface
     {
         $sql = "SELECT id, nom FROM profils WHERE nom = ?";
 
-        $profilDetail = $this->db->obtainArrayElementSQLWithParams($sql, [$criteria]);
+        $profilDetail = $this->db->findAllinDBWithParams($sql, [$criteria]);
 
         return new Profil($profilDetail['id'], $profilDetail['nom']);
     }
@@ -56,14 +56,14 @@ class ProfilRepository implements ProfilRepositoryInterface
     {
         $sql = "INSERT INTO profils (nom) VALUES (?)";
 
-        $this->db->executeSQLWithParams($sql, [$profil]);
+        $this->db->prepareAndExecuteSQL($sql, [$profil]);
     }
 
     public function editProfil(Profil $profil, string $newProfilName): void
     {
         $sql = "UPDATE profils SET nom = ? WHERE id = ?";
 
-        $this->db->executeSQLWithParams(
+        $this->db->prepareAndExecuteSQL(
             $sql,
             [
                 $newProfilName,
@@ -76,13 +76,13 @@ class ProfilRepository implements ProfilRepositoryInterface
     {
         $sql = "DELETE FROM profils WHERE id = ?";
 
-        $this->db->executeSQLWithParams($sql, [$profil->getProfilId()]);
+        $this->db->prepareAndExecuteSQL($sql, [$profil->getProfilId()]);
     }
 
     public function countProfil(): int
     {
         $sql = "SELECT COUNT(*) FROM profils";
 
-        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
+        return $this->db->findOneInDB($sql)['COUNT(*)'];
     }
 }

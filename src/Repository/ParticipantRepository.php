@@ -32,7 +32,7 @@ class ParticipantRepository implements ParticipantRepositoryInterface
     public function findOneParticipant(int $participantId): ?Participant
     {
         $sql         = "SELECT * FROM participants WHERE id = ?";
-        $participant = $this->db->obtainOneElementSQLWithParams($sql, [$participantId]);
+        $participant = $this->db->findOneInDBWithParams($sql, [$participantId]);
 
         return ParticipantFactory::buildNewParticipantFromFactory($participant, $this->db);
     }
@@ -43,7 +43,7 @@ class ParticipantRepository implements ParticipantRepositoryInterface
     public function findAllParticipant(): array
     {
         $sql          = "SELECT * FROM participants";
-        $participants = $this->db->obtainArrayElementSQL($sql);
+        $participants = $this->db->findAllInDB($sql);
 
         $allParticipants = [];
         foreach ($participants as $participant) {
@@ -63,7 +63,7 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         $sql          = $this->makeDynamicSQLFromList($listCriteria);
         $params       = $this->makeDynamicParamsFromList($criteria);
 
-        $participants = $this->db->obtainArrayElementSQLWithParams(
+        $participants = $this->db->findAllinDBWithParams(
             $sql,
             $params
         );
@@ -138,6 +138,6 @@ class ParticipantRepository implements ParticipantRepositoryInterface
     {
         $sql = "SELECT COUNT(*) FROM participants";
 
-        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
+        return $this->db->findOneInDB($sql)['COUNT(*)'];
     }
 }

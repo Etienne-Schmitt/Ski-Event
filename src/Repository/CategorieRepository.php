@@ -24,7 +24,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     public function findOneCategorie(int $categorieId): ?Categorie
     {
         $sql           = "SELECT nom FROM categories WHERE id = ?";
-        $categorieName = $this->db->obtainOneElementSQLWithParams($sql, [$categorieId])['nom'];
+        $categorieName = $this->db->findOneInDBWithParams($sql, [$categorieId])['nom'];
 
         /** Overkill but will stay here for learning confirmation */
         return CategorieFactory::buildNewFromFactory($categorieId, $categorieName);
@@ -34,7 +34,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         $sql = "SELECT id, nom FROM categories ORDER BY id";
 
-        $arrayListCategorie = $this->db->obtainArrayElementSQL($sql);
+        $arrayListCategorie = $this->db->findAllInDB($sql);
         $arrayCategorie     = [];
 
         /** @var array $categorie */
@@ -49,23 +49,23 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         $sql = "SELECT id, nom FROM categories WHERE nom = ?";
 
-        $categorieDetail = $this->db->obtainArrayElementSQLWithParams($sql, [$criteria]);
+        $categorieDetail = $this->db->findAllinDBWithParams($sql, [$criteria]);
 
         return new Categorie($categorieDetail['id'], $categorieDetail['nom']);
     }
 
-    public function addCategorie(string $categorie): void
+    public function addCategorie(string $categorie): int
     {
         $sql = "INSERT INTO categories (nom) VALUES (?)";
 
-        $this->db->executeSQLWithParams($sql, [$categorie]);
+        return $this->db->prepareAndExecuteSQL($sql, [$categorie])->fetch();
     }
 
     public function editCategorie(Categorie $categorie, string $newCategorieName): void
     {
         $sql = "UPDATE categories SET nom = ? WHERE id = ?";
 
-        $this->db->executeSQLWithParams(
+        $this->db->prepareAndExecuteSQL(
             $sql,
             [
                 $newCategorieName,
@@ -78,13 +78,13 @@ class CategorieRepository implements CategorieRepositoryInterface
     {
         $sql = "DELETE FROM categories WHERE id = ?";
 
-        $this->db->executeSQLWithParams($sql, [$categorie->getCategorieId()]);
+        $this->db->prepareAndExecuteSQL($sql, [$categorie->getCategorieId()]);
     }
 
     public function countCategorie(): int
     {
         $sql = "SELECT COUNT(*) FROM categories";
 
-        return $this->db->obtainOneElementSQL($sql)['COUNT(*)'];
+        return $this->db->findOneInDB($sql)['COUNT(*)'];
     }
 }

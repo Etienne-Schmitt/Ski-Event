@@ -19,24 +19,24 @@ class DatabaseConnection
         $this->db = $db;
     }
 
-    public function obtainOneElementSQL(string $sql): array
+    public function findOneInDB(string $sql): array
     {
         return $this->executeSQL($sql)->fetch();
     }
 
-    public function obtainArrayElementSQL(string $sql): array
+    public function findAllInDB(string $sql): array
     {
         return $this->executeSQL($sql)->fetchAll();
     }
 
-    public function obtainOneElementSQLWithParams(string $sql, array $params): array
+    public function findOneInDBWithParams(string $sql, array $params): array
     {
-        return $this->executeSQLWithParams($sql, $params)->fetch();
+        return $this->prepareAndExecuteSQL($sql, $params)->fetch();
     }
 
-    public function obtainArrayElementSQLWithParams(string $sql, array $params): array
+    public function findAllinDBWithParams(string $sql, array $params): array
     {
-        return $this->executeSQLWithParams($sql, $params)->fetchAll();
+        return $this->prepareAndExecuteSQL($sql, $params)->fetchAll();
     }
 
     public function executeSQL(string $sql): PDOStatement
@@ -44,7 +44,7 @@ class DatabaseConnection
         return $this->db->query($sql);
     }
 
-    public function executeSQLWithParams(string $sql, array $params): PDOStatement
+    public function prepareAndExecuteSQL(string $sql, array $params): PDOStatement
     {
         $sth = $this->db->prepare($sql);
         $sth->execute($params);
