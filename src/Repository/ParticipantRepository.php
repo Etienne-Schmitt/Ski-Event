@@ -53,9 +53,50 @@ class ParticipantRepository implements ParticipantRepositoryInterface
         return $allParticipants;
     }
 
+    /**
+     * @inheritdoc
+     * @throws Exception
+     */
     public function findParticipantBy(array $criteria): array
     {
-        // TODO: Implement findParticipantBy() method.
+        $listCriteria = array_keys($criteria);
+        $sql          = $this->makeDynamicSQLFromList($listCriteria);
+        $params       = $this->makeDynamicParamsFromList($criteria);
+
+        $participants = $this->db->obtainArrayElementSQLWithParams(
+            $sql,
+            $params
+        );
+
+        $listParticipants = [];
+        foreach ($participants as $participant) {
+            $listParticipants[] = ParticipantFactory::buildNewParticipantFromFactory(
+                $participant,
+                $this->db
+            );
+        }
+
+        return $listParticipants;
+    }
+
+    private function makeDynamicSQLFromList(array $listCriteria): string
+    {
+        $sql = "SELECT * FROM participants WHERE " . $listCriteria[0] . " = ?";
+        for ($i = 1, $iMax = count($listCriteria); $iMax > $i; $i++) {
+            $sql .= " AND " . $listCriteria[$i] . " = ?";
+        }
+
+        return $sql;
+    }
+
+    private function makeDynamicParamsFromList(array $listCriteria): array
+    {
+        $params = [];
+        foreach ($listCriteria as $criteriaValue) {
+            $params[] = $criteriaValue;
+        }
+
+        return $params;
     }
 
     public function findOneParticipantBy(array $criteria): ?Participant
